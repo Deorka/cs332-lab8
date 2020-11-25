@@ -141,7 +141,7 @@ namespace Affine
                         pts = make_orthographic(Axis.AXIS_Z);
                         break;
                     default:
-                        pts = make_perspective(1000);
+                        pts = make_perspective(333);
                         break;
                 }
 

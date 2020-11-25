@@ -36,6 +36,9 @@ namespace Affine
 
         Graphic Graph = null;
 
+        // CAM
+        Graphics gc;
+
         public Form1()
         {
             InitializeComponent();
@@ -59,7 +62,53 @@ namespace Affine
             System.Runtime.InteropServices.Marshal.Copy(bmpDataTexture.Scan0, rgbValuesTexture, 0, bytesTexture);
 
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+
+            // CAM
+            gc = pictureBox2.CreateGraphics();
+            gc.TranslateTransform(pictureBox2.ClientSize.Width / 2, pictureBox2.ClientSize.Height / 2);
+            gc.ScaleTransform(1, -1);
         }
+
+        // CAM
+        private void camRender()
+        {
+            if (figure == null)
+            {
+                MessageBox.Show("Неодбходимо выбрать фигуру!", "Ошибка!", MessageBoxButtons.OK);
+                return;
+            }
+            Polyhedron camFigure = new Polyhedron(figure.Polygons);
+            gc.Clear(Color.White);
+            Projection camProjection = (Projection)comboBox2.SelectedIndex;
+            // rotation
+            Point3D camPosition = new Point3D(
+                (float)camPosX.Value,
+                (float)camPosY.Value,
+                (float)camPosZ.Value
+            );
+            Point3D camTarget = new Point3D(
+                (float)camDirX.Value,
+                (float)camDirY.Value,
+                (float)camDirZ.Value
+            );
+            double OZ = toDegree(camTarget.Y, camTarget.X, camPosition.Y, camPosition.X);
+            camFigure.Rotate(OZ, Axis.AXIS_Z);
+            camFigure.reflectX();
+            camFigure.reflectY();
+            // shift
+            camFigure.Show(gc, camProjection);
+        }
+
+        private double toDegree(float x0, float y0, float x1, float y1) {
+            double relX = x1 - x0;
+            double relY = y1 - y0;
+            double deg;
+            if (relX < 0) deg = Math.Atan(relY / relX) * 180 / Math.PI + 180;
+            else if (relY < 0) deg = Math.Atan(relY / relX) * 180 / Math.PI + 360;
+            else deg = Math.Atan(relY / relX) * 180 / Math.PI;
+            return deg;
+        }
+
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -95,6 +144,7 @@ namespace Affine
                 show_texture();
 
             camera.show(g, projection);
+            camRender();
         }
 
         //Рисование фигуры
@@ -155,6 +205,7 @@ namespace Affine
                 default:
                     break;
             }
+            camRender();
         }
 
         //поворот вокруг линии
@@ -384,6 +435,31 @@ namespace Affine
                 Graph.psi += 2;
                 Graph.DrawGraphic();
             }
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            camRender();
+        }
+
+        private void camPosX_ValueChanged(object sender, EventArgs e)
+        {
+            camRender();
+        }
+
+        private void camPosY_ValueChanged(object sender, EventArgs e)
+        {
+            camRender();
+        }
+
+        private void camPosZ_ValueChanged(object sender, EventArgs e)
+        {
+            camRender();
         }
     }
 }
