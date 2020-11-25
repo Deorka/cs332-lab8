@@ -101,6 +101,9 @@ namespace Affine
             label15.Text = OX.ToString();
             // shift
             camFigure.Translate(camTarget.X, camTarget.Y, -camTarget.Z);
+            double distance = Math.Sqrt(Math.Pow(camPosition.X - camTarget.X, 2) + Math.Pow(camPosition.Y - camTarget.Y, 2) + Math.Pow(camPosition.Z - camTarget.Z, 2));
+            float scaleIndex = 50 / (float)distance;
+            camFigure.Scale(scaleIndex, scaleIndex, scaleIndex);
             camFigure.Show(gc, camProjection);
         }
 
