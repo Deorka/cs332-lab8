@@ -79,7 +79,7 @@ namespace Affine
             }
             Polyhedron camFigure = new Polyhedron(figure.Polygons);
             gc.Clear(Color.White);
-            Projection camProjection = (Projection)comboBox2.SelectedIndex;
+            Projection camProjection = Projection.PERSPECTIVE;
             // rotation
             Point3D camPosition = new Point3D(
                 (float)camPosX.Value,
@@ -104,7 +104,32 @@ namespace Affine
             double distance = Math.Sqrt(Math.Pow(camPosition.X - camTarget.X, 2) + Math.Pow(camPosition.Y - camTarget.Y, 2) + Math.Pow(camPosition.Z - camTarget.Z, 2));
             float scaleIndex = 50 / (float)distance;
             camFigure.Scale(scaleIndex, scaleIndex, scaleIndex);
-            camFigure.Show(gc, camProjection);
+
+            if (comboBox2.SelectedIndex != 1)
+                camFigure.Show(gc, camProjection);
+            else
+            {
+                int[] buff = new int[pictureBox2.Width * pictureBox2.Height];
+                int[] colors = new int[pictureBox2.Width * pictureBox2.Height];
+
+                camFigure.calculateZBuffer(camera.view, pictureBox2.Width, pictureBox2.Height, out buff, out colors);
+
+                Bitmap bmp = new Bitmap(pictureBox2.Width, pictureBox2.Height);
+                pictureBox2.Image = bmp;
+
+                gc.Clear(Color.White);
+
+                for (int i = 0; i < pictureBox2.Width; ++i)
+                    for (int j = 0; j < pictureBox2.Height; ++j)
+                    {
+                        Color c = Color.FromArgb(buff[i * pictureBox2.Height + j], buff[i * pictureBox2.Height + j], buff[i * pictureBox2.Height + j]);
+                        bmp.SetPixel(i, j, c);
+                    }
+
+                pictureBox2.Refresh();
+            }
+
+            
         }
 
         private double toDegree(float x0, float y0, float x1, float y1) {

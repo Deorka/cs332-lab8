@@ -491,8 +491,8 @@
             // 
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Items.AddRange(new object[] {
-            "Перспективная",
-            "Параллельная"});
+            "Отсечение невидимых граней",
+            "Z-буфер"});
             this.comboBox2.Location = new System.Drawing.Point(741, 299);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(144, 21);
@@ -504,9 +504,9 @@
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(678, 302);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(57, 13);
+            this.label13.Size = new System.Drawing.Size(56, 13);
             this.label13.TabIndex = 108;
-            this.label13.Text = "Проекция";
+            this.label13.Text = "Алгоритм";
             // 
             // pictureBox2
             // 
