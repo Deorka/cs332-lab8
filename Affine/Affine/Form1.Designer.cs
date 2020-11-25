@@ -68,6 +68,7 @@
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.label15 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
@@ -405,7 +406,7 @@
             this.camPosX.Size = new System.Drawing.Size(44, 20);
             this.camPosX.TabIndex = 101;
             this.camPosX.Value = new decimal(new int[] {
-            5,
+            50,
             0,
             0,
             0});
@@ -423,7 +424,7 @@
             this.camPosY.Size = new System.Drawing.Size(44, 20);
             this.camPosY.TabIndex = 102;
             this.camPosY.Value = new decimal(new int[] {
-            5,
+            50,
             0,
             0,
             0});
@@ -440,28 +441,51 @@
             this.camPosZ.Name = "camPosZ";
             this.camPosZ.Size = new System.Drawing.Size(44, 20);
             this.camPosZ.TabIndex = 103;
+            this.camPosZ.Value = new decimal(new int[] {
+            40,
+            0,
+            0,
+            0});
             this.camPosZ.ValueChanged += new System.EventHandler(this.camPosZ_ValueChanged);
             // 
             // camDirX
             // 
             this.camDirX.Location = new System.Drawing.Point(980, 300);
+            this.camDirX.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.camDirX.Name = "camDirX";
             this.camDirX.Size = new System.Drawing.Size(44, 20);
             this.camDirX.TabIndex = 104;
+            this.camDirX.ValueChanged += new System.EventHandler(this.camDirX_ValueChanged);
             // 
             // camDirY
             // 
             this.camDirY.Location = new System.Drawing.Point(1030, 300);
+            this.camDirY.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.camDirY.Name = "camDirY";
             this.camDirY.Size = new System.Drawing.Size(44, 20);
             this.camDirY.TabIndex = 105;
+            this.camDirY.ValueChanged += new System.EventHandler(this.camDirY_ValueChanged);
             // 
             // camDirZ
             // 
             this.camDirZ.Location = new System.Drawing.Point(1080, 300);
+            this.camDirZ.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.camDirZ.Name = "camDirZ";
             this.camDirZ.Size = new System.Drawing.Size(44, 20);
             this.camDirZ.TabIndex = 106;
+            this.camDirZ.ValueChanged += new System.EventHandler(this.camDirZ_ValueChanged);
             // 
             // comboBox2
             // 
@@ -492,11 +516,21 @@
             this.pictureBox2.TabIndex = 109;
             this.pictureBox2.TabStop = false;
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(1166, 273);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(41, 13);
+            this.label15.TabIndex = 110;
+            this.label15.Text = "label15";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1251, 701);
+            this.Controls.Add(this.label15);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.comboBox2);
@@ -597,6 +631,7 @@
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label label15;
     }
 }
 

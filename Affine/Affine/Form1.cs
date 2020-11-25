@@ -95,7 +95,12 @@ namespace Affine
             camFigure.Rotate(OZ, Axis.AXIS_Z);
             camFigure.reflectX();
             camFigure.reflectY();
+            float distZ = (float)Math.Sqrt(Math.Pow(camPosition.X - camTarget.X, 2) + Math.Pow(camPosition.Y - camTarget.Y, 2));
+            double OX = toDegree(0, 0, distZ, camPosition.Z - camTarget.Z);
+            camFigure.Rotate(270 + OX, Axis.AXIS_X);
+            label15.Text = OX.ToString();
             // shift
+            camFigure.Translate(camTarget.X, camTarget.Y, -camTarget.Z);
             camFigure.Show(gc, camProjection);
         }
 
@@ -458,6 +463,21 @@ namespace Affine
         }
 
         private void camPosZ_ValueChanged(object sender, EventArgs e)
+        {
+            camRender();
+        }
+
+        private void camDirX_ValueChanged(object sender, EventArgs e)
+        {
+            camRender();
+        }
+
+        private void camDirY_ValueChanged(object sender, EventArgs e)
+        {
+            camRender();
+        }
+
+        private void camDirZ_ValueChanged(object sender, EventArgs e)
         {
             camRender();
         }
